@@ -1,0 +1,58 @@
+@page "/"
+@rendermode @(new InteractiveWebAssemblyRenderMode(prerender: false))
+
+@using Mapsui.UI.Blazor
+
+<PageTitle>Draw Last Run</PageTitle>
+
+<header class="app-header">
+    <h1>Draw Last Run</h1>
+</header>
+
+<section class="file-loader" aria-labelledby="file-loader-title">
+    <h2 id="file-loader-title">Load a GPX run</h2>
+    <p>Select the GPX file containing the route you want to remember.</p>
+    <InputFile OnChange="LoadGpx" accept=".gpx,application/gpx+xml" />
+    @if (_isLoading)
+    {
+        <p role="status">Loading GPX file...</p>
+    }
+    else if (_loadedRoute is not null)
+    {
+        <p class="success" role="status">Loaded <strong>@_loadedRoute.Name</strong> with @_loadedRoute.Points.Count points.</p>
+    }
+    else if (_loadError is not null)
+    {
+        <p class="error" role="alert">@_loadError</p>
+    }
+</section>
+
+<section class="drawing-panel" aria-labelledby="drawing-title">
+    <div>
+        <h2 id="drawing-title">Draw the route from memory</h2>
+        <p>Trace the route on the map, then compare it with the loaded activity.</p>
+    </div>
+    <div class="actions">
+        <button class="primary" type="button" @onclick="ToggleDrawing" disabled="@(_loadedRoute is null)">
+            @(_isDrawing ? "Finish drawing" : "Start drawing")
+        </button>
+        <button type="button" @onclick="ClearDrawing" disabled="@(_drawnPoints.Count == 0)">Clear</button>
+        <button type="button" @onclick="CompareRoutes" disabled="@(_loadedRoute is null || _drawnPoints.Count < 2)">Compare routes</button>
+    </div>
+    @if (_isDrawing)
+    {
+        <p class="hint" role="status">Hold the pointer and trace the route. Map navigation is paused while drawing.</p>
+    }
+    else if (_comparison is not null)
+    {
+        <p class="comparison" role="status">Similarity: <strong>@_comparison.Score%</strong><span>Average deviation: @_comparison.DeviationMeters.ToString("0") m</span></p>
+    }
+</section>
+
+<div class="map-container">
+    <MapControlComponent @ref="_mapControl" />
+    <div class="zoom-controls" role="group" aria-label="Map zoom controls">
+        <button type="button" @onclick="ZoomIn" aria-label="Zoom in">+</button>
+        <button type="button" @onclick="ZoomOut" aria-label="Zoom out">-</button>
+    </div>
+</div>

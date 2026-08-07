@@ -1,5 +1,6 @@
 <Solution>
   <Project Path="DrawLastRun.AppHost/DrawLastRun.AppHost.csproj" />
+  <Project Path="DrawLastRun.Client/DrawLastRun.Client.csproj" />
   <Project Path="DrawLastRun.ServiceDefaults/DrawLastRun.ServiceDefaults.csproj" />
   <Project Path="DrawLastRun.Web/DrawLastRun.Web.csproj" />
 </Solution>

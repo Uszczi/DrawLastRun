@@ -1,0 +1,131 @@
+.app-header {
+    text-align: center;
+}
+
+.app-header h1 {
+    margin-bottom: 1.5rem;
+}
+
+.file-loader,
+.drawing-panel {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border: 1px solid #dee2e6;
+    border-radius: .5rem;
+}
+
+.file-loader h2,
+.drawing-panel h2 {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.success,
+.comparison {
+    color: #146c43;
+}
+
+.error {
+    color: #b02a37;
+}
+
+.drawing-panel {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    background: #f8f9fa;
+}
+
+.drawing-panel p {
+    margin: .25rem 0 0;
+}
+
+.actions {
+    display: flex;
+    gap: .5rem;
+    margin-left: auto;
+    flex-wrap: wrap;
+}
+
+.actions button {
+    padding: .5rem .75rem;
+    border: 1px solid #adb5bd;
+    border-radius: .375rem;
+    background: white;
+    cursor: pointer;
+}
+
+.actions button:disabled {
+    cursor: not-allowed;
+    opacity: .55;
+}
+
+.actions .primary {
+    border-color: #0d6efd;
+    background: #0d6efd;
+    color: white;
+}
+
+.hint,
+.comparison {
+    flex-basis: 100%;
+}
+
+.comparison span {
+    margin-left: 1rem;
+    color: #495057;
+}
+
+.map-container {
+    position: relative;
+    width: 100%;
+    height: 75vh;
+    min-height: 400px;
+    overflow: hidden;
+    border: 1px solid #dee2e6;
+    border-radius: .5rem;
+}
+
+.map-container ::deep > :first-child {
+    width: 100%;
+    height: 100%;
+    cursor: grab;
+}
+
+.map-container ::deep > :first-child:active {
+    cursor: grabbing;
+}
+
+.map-container ::deep canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+}
+
+.zoom-controls {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+}
+
+.zoom-controls button {
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid #adb5bd;
+    border-radius: .25rem;
+    background: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+@media (max-width: 640px) {
+    .actions {
+        margin-left: 0;
+    }
+}

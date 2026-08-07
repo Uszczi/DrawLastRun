@@ -2,6 +2,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DrawLastRun.ServiceDefaults\DrawLastRun.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\DrawLastRun.Client\DrawLastRun.Client.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="10.0.0" />
   </ItemGroup>
 
   <PropertyGroup>
@@ -9,6 +14,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <BlazorDisableThrowNavigationException>true</BlazorDisableThrowNavigationException>
+    <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
   </PropertyGroup>
 
 </Project>
