@@ -1,13 +1,7 @@
-using DrawLastRun.Web.Components;
+using DrawLastRun.Web;
 
 var builder = WebApplication.CreateBuilder(args);
-
-builder.AddServiceDefaults();
-
-// Add services to the container.
-builder.Services.AddRazorComponents()
-    .AddInteractiveServerComponents()
-    .AddInteractiveWebAssemblyComponents();
+builder.RegisterServices();
 
 var app = builder.Build();
 
@@ -24,12 +18,6 @@ app.UseHttpsRedirection();
 app.UseAntiforgery();
 
 app.MapStaticAssets();
-app.MapRazorComponents<App>()
-    .AddAdditionalAssemblies(typeof(DrawLastRun.Client.ClientAssemblyMarker).Assembly)
-    .AddInteractiveServerRenderMode()
-    .AddInteractiveWebAssemblyRenderMode();
-
-
-app.MapDefaultEndpoints();
+app.MapApplicationEndpoints();
 
 app.Run();
