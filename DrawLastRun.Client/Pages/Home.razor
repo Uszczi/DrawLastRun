@@ -33,15 +33,23 @@
         <p>Trace the route on the map, then compare it with the loaded activity.</p>
     </div>
     <div class="actions">
-        <button class="primary" type="button" @onclick="ToggleDrawing" disabled="@(_loadedRoute is null)">
+        <button class="primary" type="button" @onclick="ToggleDrawing" disabled="@(_loadedRoute is null || _isComparing)">
             @(_isDrawing ? "Finish drawing" : "Start drawing")
         </button>
-        <button type="button" @onclick="ClearDrawing" disabled="@(_drawnPoints.Count == 0)">Clear</button>
-        <button type="button" @onclick="CompareRoutes" disabled="@(_loadedRoute is null || _drawnPoints.Count < 2)">Compare routes</button>
+        <button type="button" @onclick="ClearDrawing" disabled="@(_drawnPoints.Count == 0 || _isComparing)">Clear</button>
+        <button type="button" @onclick="CompareRoutes" disabled="@(_loadedRoute is null || _drawnPoints.Count < 2 || _isDrawing || _isComparing)">Compare routes</button>
     </div>
     @if (_isDrawing)
     {
         <p class="hint" role="status">Hold the pointer and trace the route. Map navigation is paused while drawing.</p>
+    }
+    else if (_isComparing)
+    {
+        <div class="comparison-progress" role="status" aria-live="polite">
+            <p>@_comparisonStatus</p>
+            <progress max="100" value="@_comparisonProgress">@_comparisonProgress%</progress>
+            <span>@_comparisonProgress%</span>
+        </div>
     }
     else if (_comparison is not null)
     {

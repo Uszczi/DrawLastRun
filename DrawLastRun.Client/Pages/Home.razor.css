@@ -77,6 +77,25 @@
     color: #495057;
 }
 
+.comparison-progress {
+    flex-basis: 100%;
+}
+
+.comparison-progress p {
+    margin-bottom: .35rem;
+}
+
+.comparison-progress progress {
+    width: min(100%, 24rem);
+    height: .75rem;
+    vertical-align: middle;
+}
+
+.comparison-progress span {
+    margin-left: .5rem;
+    color: #495057;
+}
+
 .map-container {
     position: relative;
     width: 100%;
