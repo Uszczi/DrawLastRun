@@ -4,6 +4,10 @@ WORKDIR /src
 COPY . .
 
 # The client project performs a native WebAssembly publish.
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends python3 \
+    && ln -sf /usr/bin/python3 /usr/local/bin/python \
+    && rm -rf /var/lib/apt/lists/*
 RUN dotnet workload install wasm-tools
 RUN dotnet restore DrawLastRun.Web/DrawLastRun.Web.csproj
 RUN dotnet publish DrawLastRun.Web/DrawLastRun.Web.csproj \
